@@ -1,0 +1,61 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AdventureGame : MonoBehaviour
+{
+    //linking our text to show on our dialogue box in Unity
+    [SerializeField] Text textComponent;
+
+    //linking our state on our empty gameobject
+    [SerializeField] State startingState;
+
+
+    //continuously knows what state we're in
+    State state;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //making our state equal w/e we pinned to our [SerializeField] State object
+        state = startingState;
+        /*using state to grab the object we pinned to State startingState to print itself out on the
+        textComponent. GetStateStory: a method from the State script*/
+        textComponent.text = state.GetStateStory();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //managing  states iof the player to chose the path they want
+        ManageState();
+        
+    }
+
+    private void ManageState()
+    {
+        //a variable that keeps track of what the next states actually are. Using var for speed- VS knows what variable GetNextState() is
+        var nextStates = state.GetNextStates(); //GetNextStates() method from State script
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) //if the '1' key is pressed
+        {
+            //change the state of element 0 (the first state)
+            state = nextStates[0];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) //if the '1' key is pressed
+        {
+            //change the state of element 1 (the second state)
+            state = nextStates[1];
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) //if the '1' key is pressed
+        {
+            //change the state of element 2 (the third state)
+            state = nextStates[2];
+        }
+        //returning these as the story text
+        textComponent.text = state.GetStateStory();
+    }
+}
