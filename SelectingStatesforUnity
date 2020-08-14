@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//creates a new asset file (where you go to create files and folders)
+[CreateAssetMenu(menuName = "State")]
+public class State : ScriptableObject
+{
+    //where we can write our story in the Unity engine.
+   [TextArea(10, 14)] [SerializeField] string storyText;
+    //Text Area gives more lines for the storyText instead of just one thin line.
+    //10- the min size of our field where we can write our text.
+    //14- the amount of lines before we start scrolling. If we exceed 10, it'll increase to 14, THEN scroll.
+
+    //making an array of states we can use in succession
+    [SerializeField] State[] nextStates;
+
+    //returning the story texy
+    public string GetStateStory()
+    {
+        return storyText;
+    }
+
+    //returns a series of states
+    public State[] GetNextStates()
+    {
+        return nextStates;
+    }
+}
